@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>new XSS pattern with jQuery</title>
+<script src="jquery-1.6.1.min.js"></script>
+<script>
+    $(function(){
+        try { $(location.hash) } catch(e) {}
+    })
+</script>
+</head>
+<body>
+<h1>XSS with $(location.hash)</h1>
+<h2>demo</h2>
+<p>Click this <a href="#<img src=/ onerror=alert(1)>" target="_blank">link</a>.</p>
+<p>
+ It works on IE, Firefox, Chrome, Opera. In Safari, location.hash is percent encoded, not work.
+</p>
+<h2>why?</h2>
+$("#id") is css selector, $("&lt;img&gt;") is createElement, and $("#&lt;img&gt;") is createElement too.
+<h2>how to fix</h2>
+<h3>in your library</h3>
+<pre>var hash = "#" + location.hash.replace(/[^\w]/g, "");
+if ($(hash).size()) { ... }
+</pre>
+
+<h3>or patch to jQuery</h3>
+<pre>
+-       quickExpr = /^(?:[^<]*(<[\w\W]+>)[^>]*$|#([\w\-]*)$)/,
++       quickExpr = /^(?:[^#<]*(<[\w\W]+>)[^>]*$|#([\w\-]*)$)/,
+</pre>
+<h2>examples</h2>
+<ul>
+<li><a href="http://codesearch.google.com/codesearch?as_q=%22%24%28location.hash%29%22">Google Code Search</a>
+</ul>
+<h2>thanks</h2>
+<a href="http://twitter.com/t_ashula">@t_ashula</a>
+<h2>Retrieved from</h2>
+<a href="http://bugs.jquery.com/ticket/9521">Bug ticket from jQuery</a>
+</body>
+</html>
