@@ -14,11 +14,13 @@ This is a github project containing JSP implementations of the 2013 OWASP Top 10
 
 Some of their projects were not pushed into the repository. This was a partial deliverable for the **SECUDEV** (Secure Development) course of **De La Salle University Manila** in the Academic Year 2014-2015 Term 1 under Sir [Danny Cheng](http://www.dlsu.edu.ph/faculty/fis/faculty_info.asp?fac_id=103921818).
 
-## OWASP Top 10 2013, from A1-A10 on the Java platform
-
 ### A8 - Cross-Site Request Forgery
 
 > Attacker creates forged HTTP requests and tricks a victim into submitting them via image tags, XSS, or numerous other techniques. If the user is authenticated, the attack succeeds. (OWASP A8, 2013)
+
+**References**
+
+- [OWASP A8](https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF))
 
 ### A9 - Using Components with Known Vulnerabilities
 
